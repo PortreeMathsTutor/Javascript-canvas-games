@@ -515,13 +515,9 @@ drawBamboo();
     <source src="labled for reuse sad music.mp3" >
   </audio>
   
-  <audio id="vsad">
-    <source src="Saddest Song Ever.mp3" >
-  </audio>
 
-<audio id="exp">
-    <source src=" " >
-  </audio>
+
+
 
 <audio id="ap">
     <source src="applause.mp3" >
