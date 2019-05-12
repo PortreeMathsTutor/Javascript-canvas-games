@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html>
+
+<head>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-
+
+ui.min.js"></script>
+
+
+</head>
+<body>
+
+<style>
+canvas {
+    color:transparent;
+}
+
+.card {
+    width: 1000px;
+	height: 500px;
+	background-image: url("sky.png");
+    background-color: #cccccc;
+}
+</style>
+
+<div class="card"  >
+
+<canvas id="myCanvas"  width="1000" height="500" style="border:1px solid #000000;">
+<div id="testDiv" width="300" height="100" style="background-color:#336699">
+CONGRATULATIONS! NEXT LEVEL IS FASTER!
+</div>
+</canvas>
+</div>
+<script>
+
+setInterval(draw, 10);
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var ballRadius = 10;
+var m =416
+var n =281
+var x = 600
+var y = 340
+var rightPressed = false;
+var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
+var levelSpeed = 0.01
+var dx =.1;
+var dy = -.1;
+var hits = 0;
+var coinImage = new Image();
+coinImage.src = "images/coin-sprite-animation.png";
+
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+
+
+ <!-- 37      37      37      37      37      Left arrow -->
+ <!-- 39      39      39      39      39      Right arrow -->
+  <!-- 38      38      38      38      38      Up arrow -->
+ <!-- 40      40      40      40      40      Down arrow -->
+function keyDownHandler(e) {
+    if(e.keyCode == 39) {
+        rightPressed = true;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = true;
+    }
+    if(e.keyCode == 40) {
+        upPressed = true;
+    }
+    else if(e.keyCode == 38) {
+        downPressed = true;
+    }
+}
+function keyUpHandler(e) {
+   if(e.keyCode == 39) {
+        rightPressed = false;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+    if(e.keyCode == 40) {
+        upPressed = false;
+    }
+    else if(e.keyCode == 38) {
+        downPressed = false;
+    }
+}
+function drawObstical1() {
+ ctx.beginPath();
+ctx.moveTo(250, 20);
+ctx.lineTo(250, 20);
+ctx.lineTo(250, 90);
+ctx.lineTo(200, 90);
+ctx.lineTo(200, 20);
+ctx.stroke();
+ctx.strokeStyle="#000000";
+ctx.fillStyle = "red";
+ctx.fill();
+    ctx.closePath();
+}
+function drawBamboo() {
+//filled circle
+ctx.beginPath();
+ctx.arc(x-55,y-55,50,1,2);//white circle center(x,y) radius  startangle 0  
+//endangle 2pi  (pi is half of a rotation)
+ctx.fillStyle = "green";
+ctx.fill();
+ctx.lineWidth=1;
+ctx.stroke();
+
+//filled circle
+ctx.beginPath();
+ctx.arc(x-45,y-45,50,1.4,2.4);
+ctx.fillStyle = "green";
+ctx.fill();
+ctx.lineWidth=1;
+ctx.stroke();
+
+var dx=hits/100;
+var dy=-hits/100;
+}
+
+
+function drawObstical2() {
+ctx.beginPath();
+ctx.moveTo(800, 150);
+ctx.lineTo(800, 150);
+ctx.lineTo(800, 100);
+ctx.lineTo(850, 100);
+ctx.lineTo(850, 150);
+ctx.stroke();
+ctx.strokeStyle="#000000";
+ctx.fillStyle = "red";
+ctx.fill();
+    ctx.closePath();
+}
+
+
+function drawPanda() {
+    
+ctx.beginPath();
+ctx.fillStyle = "#000000";
+ctx.moveTo(420,454);
+ctx.bezierCurveTo(482.23299999999995,457.267,491.832,388.454,492.49699999999996,358.5);
+ctx.bezierCurveTo(494.405,272.582,421.96099999999996,270.204,421.96099999999996,270.204);
+ctx.bezierCurveTo(421.96099999999996,270.204,349.02599999999995,273.744,343.99699999999996,352.5);
+ctx.bezierCurveTo(341.97599999999994,384.149,343.99699999999996,450,420.09,454);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+
+    
+ctx.beginPath();
+ctx.fillStyle = "#000000";
+ctx.moveTo(356.5,124.5);
+ctx.bezierCurveTo(377.4868204935702,124.5,394.5,142.40861000676824,394.5,164.5);
+ctx.bezierCurveTo(394.5,186.59138999323176,377.4868204935702,204.5,356.5,204.5);
+ctx.bezierCurveTo(335.5131795064298,204.5,318.5,186.59138999323176,318.5,164.5);
+ctx.bezierCurveTo(318.5,142.40861000676824,335.5131795064298,124.5,356.5,124.5);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();    
+    
+    ctx.beginPath();
+ctx.fillStyle = "#000000";
+ctx.moveTo(509.5,146.5);
+ctx.bezierCurveTo(530.4868204935701,146.5,547.5,164.40861000676824,547.5,186.5);
+ctx.bezierCurveTo(547.5,208.59138999323176,530.4868204935701,226.5,509.5,226.5);
+ctx.bezierCurveTo(488.5131795064298,226.5,471.5,208.59138999323176,471.5,186.5);
+ctx.bezierCurveTo(471.5,164.40861000676824,488.5131795064298,146.5,509.5,146.5);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(329,219);
+ctx.bezierCurveTo(336.663,184.457,361.026,123.165,444,136.5);
+ctx.bezierCurveTo(472,141,545.88,182.43,518,264);
+ctx.bezierCurveTo(506.5,297.64,477.5,295.5,477.5,295.5);
+ctx.bezierCurveTo(477.5,295.5,453.5,320,410.5,312);
+ctx.bezierCurveTo(376.355,305.647,362,282.5,362,282.5);
+ctx.bezierCurveTo(362,282.5,318.5,266.33299999999997,329,219);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+        
+
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(421.5,349.857);
+ctx.bezierCurveTo(440.0015391193316,349.857,455,366.9028627196922,455,387.93);
+ctx.bezierCurveTo(455,408.9571372803078,440.0015391193316,426.003,421.5,426.003);
+ctx.bezierCurveTo(402.9984608806684,426.003,388,408.9571372803078,388,387.93);
+ctx.bezierCurveTo(388,366.9028627196922,402.9984608806684,349.857,421.5,349.857);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+    
+ctx.beginPath();
+ctx.fillStyle = "#000000";
+ctx.moveTo(466.5,203.85);
+ctx.bezierCurveTo(484.0350408071277,203.85,498.25,221.64668119422595,498.25,243.6);
+ctx.bezierCurveTo(498.25,265.55331880577404,484.0350408071277,283.35,466.5,283.35);
+ctx.bezierCurveTo(448.9649591928723,283.35,434.75,265.55331880577404,434.75,243.6);
+ctx.bezierCurveTo(434.75,221.64668119422595,448.9649591928723,203.85,466.5,203.85);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+    
+
+
+    
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(466.5,218.49200000000002);
+ctx.bezierCurveTo(478.07809749545277,218.49200000000002,487.464,228.62290068082882,487.464,241.12);
+ctx.bezierCurveTo(487.464,253.6170993191712,478.07809749545277,263.748,466.5,263.748);
+ctx.bezierCurveTo(454.92190250454723,263.748,445.536,253.6170993191712,445.536,241.12);
+ctx.bezierCurveTo(445.536,228.62290068082882,454.92190250454723,218.49200000000002,466.5,218.49200000000002);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+
+      
+ctx.beginPath();
+ctx.fillStyle = "#000000";
+ctx.moveTo(466.5,224.12);
+ctx.bezierCurveTo(475.198484809835,224.12,482.25,231.73115925287652,482.25,241.12);
+ctx.bezierCurveTo(482.25,250.5088407471235,475.198484809835,258.12,466.5,258.12);
+ctx.bezierCurveTo(457.801515190165,258.12,450.75,250.5088407471235,450.75,241.12);
+ctx.bezierCurveTo(450.75,231.73115925287652,457.801515190165,224.12,466.5,224.12);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();  
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(465.75,228.25);
+ctx.bezierCurveTo(470.03020681118863,228.25,473.5,230.71243387593063,473.5,233.75);
+ctx.bezierCurveTo(473.5,236.78756612406937,470.03020681118863,239.25,465.75,239.25);
+ctx.bezierCurveTo(461.46979318881137,239.25,458,236.78756612406937,458,233.75);
+ctx.bezierCurveTo(458,230.71243387593063,461.46979318881137,228.25,465.75,228.25);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.arc(476.75,239.25,3.25,0,6.283185307179586);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();    
+
+ ctx.fillStyle = "#000000";    
+ctx.beginPath();
+ctx.moveTo(381,193.25);
+ctx.bezierCurveTo(398.5350408071277,193.25,412.75,211.04668119422595,412.75,233);
+ctx.bezierCurveTo(412.75,254.95331880577405,398.5350408071277,272.75,381,272.75);
+ctx.bezierCurveTo(363.4649591928723,272.75,349.25,254.95331880577405,349.25,233);
+ctx.bezierCurveTo(349.25,211.04668119422595,363.4649591928723,193.25,381,193.25);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+       
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(381,208.872);
+ctx.bezierCurveTo(392.57809749545277,208.872,401.964,219.00290068082882,401.964,231.5);
+ctx.bezierCurveTo(401.964,243.99709931917118,392.57809749545277,254.128,381,254.128);
+ctx.bezierCurveTo(369.42190250454723,254.128,360.036,243.99709931917118,360.036,231.5);
+ctx.bezierCurveTo(360.036,219.00290068082882,369.42190250454723,208.872,381,208.872);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+
+    
+ctx.fillStyle = "#000000";    
+ctx.beginPath();
+ctx.moveTo(381,214.5);
+ctx.bezierCurveTo(389.698484809835,214.5,396.75,222.11115925287652,396.75,231.5);
+ctx.bezierCurveTo(396.75,240.88884074712348,389.698484809835,248.5,381,248.5);
+ctx.bezierCurveTo(372.301515190165,248.5,365.25,240.88884074712348,365.25,231.5);
+ctx.bezierCurveTo(365.25,222.11115925287652,372.301515190165,214.5,381,214.5);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+  ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(380.25,220.5);
+ctx.bezierCurveTo(384.53020681118863,220.5,388,222.96243387593063,388,226);
+ctx.bezierCurveTo(388,229.03756612406937,384.53020681118863,231.5,380.25,231.5);
+ctx.bezierCurveTo(375.96979318881137,231.5,372.5,229.03756612406937,372.5,226);
+ctx.bezierCurveTo(372.5,222.96243387593063,375.96979318881137,220.5,380.25,220.5);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+      
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.arc(391.25,231.5,3.25,0,6.283185307179586);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+    
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(382,258.12);
+ctx.bezierCurveTo(382,258.12,403.5,230.502,430,238.002);
+ctx.bezierCurveTo(457.892,245.89600000000002,458,276.502,458,276.502);
+ctx.bezierCurveTo(458,276.502,444.085,310.81600000000003,409.5,300.502);
+ctx.bezierCurveTo(381,292.002,382,258.12,382,258.12);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+    
+ctx.fillStyle = "#000000";  
+ctx.beginPath();
+ctx.moveTo(421.5,251.625);
+ctx.bezierCurveTo(430.198484809835,251.625,437.25,255.8223304703363,437.25,261);
+ctx.bezierCurveTo(437.25,266.1776695296637,430.198484809835,270.375,421.5,270.375);
+ctx.bezierCurveTo(412.801515190165,270.375,405.75,266.1776695296637,405.75,261);
+ctx.bezierCurveTo(405.75,255.8223304703363,412.801515190165,251.625,421.5,251.625);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+    ctx.fillStyle = "#000000";      
+ctx.beginPath();
+ctx.moveTo(472.61,313.6);
+ctx.bezierCurveTo(438.36,310.995,446.99,377.274,441.389,391.995);
+ctx.bezierCurveTo(437.555,402.071,419.829,402.495,420.097,429.495);
+ctx.bezierCurveTo(420.24699999999996,444.676,426.361,459.997,472.611,459.995);
+ctx.bezierCurveTo(506.202,459.994,514.702,442.743,512.611,430.495);
+ctx.bezierCurveTo(509.111,409.995,498.042,402.361,494.325,392.495);
+ctx.bezierCurveTo(489.323,379.221,489.111,335.995,489.111,335.995);
+ctx.bezierCurveTo(489.111,335.995,489.063,314.852,472.61,313.6);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
+    
+
+ctx.fillStyle = "#000000";      
+ctx.beginPath();
+ctx.moveTo(380.25,313.6);
+ctx.bezierCurveTo(346,310.995,354.63,377.274,349.029,391.995);
+ctx.bezierCurveTo(345.195,402.071,327.469,402.495,327.736,429.495);
+ctx.bezierCurveTo(327.88599999999997,444.676,334,459.997,380.25,459.995);
+ctx.bezierCurveTo(413.841,459.994,422.341,442.743,420.25,430.495);
+ctx.bezierCurveTo(416.75,409.995,405.681,402.361,401.964,392.495);
+ctx.bezierCurveTo(396.963,379.221,396.75,335.995,396.75,335.995);
+ctx.bezierCurveTo(396.75,335.995,396.703,314.852,380.25,313.6);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();    
+    
+ctx.beginPath();
+ctx.moveTo(m,n);
+ctx.bezierCurveTo(430.956,284.123,436.42900000000003,278.358,436.42900000000003,278.358);
+ctx.bezierCurveTo(436.42900000000003,278.358,429.81800000000004,288.5,414.22400000000005,284.916);
+ctx.bezierCurveTo(402.04100000000005,282.117,399.68100000000004,269.576,399.68100000000004,269.576);
+ctx.bezierCurveTo(399.68100000000004,269.576,402.206,277.516,415.54,280.58000000000004);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+    
+};
+
+  function drawScore() {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "white";
+        ctx.fillText("Score = "+hits, 8, 20);
+    }
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawObstical1();
+	drawObstical2();
+	drawPanda();
+	drawScore();
+drawBamboo();
+
+		if( 205 < x && x < 320 && 10 < y && y < 100){ document.getElementById('sad').play();  document.location.reload();; }
+		if( 828 < x && x < 920 && 90 < y && y < 160){ document.getElementById('sad').play();  document.location.reload();;}
+		if( 30 < x && x < 90 && 90 < y && y < 120){ hits +=1;document.getElementById('ap').play();}
+	    if( m-50 < x && x < m+80 && n-50 < y && y < m+50){ hits +=1;document.getElementById('ap').play();}
+		
+	 if(hits == 100) {
+                     	 $(document).ready(function() {
+    $("#testDiv").dialog({
+        height: 100,
+        modal: true,
+        open: function(event, ui){
+           setTimeout("$('#testDiv').dialog('close')",1000);
+        }
+    });
+ });
+                  levelSpeed+=.1;
+				
+                    }	
+					
+						 if(hits == 200) {
+                     	 $(document).ready(function() {
+    $("#testDiv").dialog({
+        height: 100,
+        modal: true,
+        open: function(event, ui){
+           setTimeout("$('#testDiv').dialog('close')",1000);
+        }
+    });
+ });
+                  levelSpeed+=.3;
+				
+                    }
+
+	 if(hits == 300) {
+                     	 $(document).ready(function() {
+    $("#testDiv").dialog({
+        height: 100,
+        modal: true,
+        open: function(event, ui){
+           setTimeout("$('#testDiv').dialog('close')",1000);
+        }
+    });
+ });
+                  levelSpeed+=.5;
+				
+                    }					
+
+	 if(hits == 100) {
+                     	 $(document).ready(function() {
+    $("#testDiv").dialog({
+        height: 400,
+        modal: true,
+        open: function(event, ui){
+           setTimeout("$('#testDiv').dialog('close')",1000);
+        }
+    });
+ });
+                  levelSpeed+=.8;
+				
+                    }						
+	 if(hits == 2000) {
+                      $(document).ready(function() {
+    $("#testDiv").dialog({
+        height: 100,
+        modal: true,
+        open: function(event, ui){
+           setTimeout("$('#testDiv').dialog('close')",1000);
+        }
+    });
+ });
+                  levelSpeed+=5;
+				
+                    }	
+				
+	
+  if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+        dx = -dx;
+    }
+	
+	
+    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+        dy = -dy;
+    }
+    
+  if(rightPressed ) {
+        dx += levelSpeed;
+    }
+    else if(leftPressed ) {
+        dx -= levelSpeed;
+    }
+	
+	  if(upPressed ) {
+        dy += levelSpeed;
+    }
+    else if(downPressed ) {
+        dy -= levelSpeed;
+    }
+	
+	if (dx>levelSpeed){dx==levelSpeed-.1;}
+	if (dx<-levelSpeed){dx==-levelSpeed+.1;}
+	if (dy>levelSpeed){dy==levelSpeed-.1;}
+	if (dy<-levelSpeed){dy==-levelSpeed+.1;}
+	
+    x += dx;
+    y += dy;
+		
+}
+
+</script>
+<audio id="sad">
+    <source src="labled for reuse sad music.mp3" >
+  </audio>
+  
+  <audio id="vsad">
+    <source src="Saddest Song Ever.mp3" >
+  </audio>
+
+<audio id="exp">
+    <source src=" " >
+  </audio>
+
+<audio id="ap">
+    <source src="applause.mp3" >
+  </audio>
+
+
+</body>
+</html>
